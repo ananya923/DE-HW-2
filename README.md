@@ -1,6 +1,6 @@
-Mini-assignment 2 for IDS706 Data Engineering (README made with the help if AI and edited manually for accuracy)
-Name: Ananya Jogalekar
-NetID: aj463
+- Mini-assignment 2 for IDS706 Data Engineering (README made with the help if AI and edited manually for accuracy)
+- Name: Ananya Jogalekar
+- NetID: aj463
 
 # Customer Behavior Analysis
 
