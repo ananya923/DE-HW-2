@@ -6,26 +6,29 @@
 # Importing necessary libraries
 import pandas as pd
 import numpy as np
-from kmodes.kprototypes import KPrototypes # I installed kmodes after getting a ModuleNotFoundError on my machine
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Import the Dataset
 data = pd.read_csv('Data.csv')
 
 # Inspect the Data
-# E.g., Display the first few rows using .head() to get a quick overview.
-# E.g., Use .info() and .describe() to understand data types and summary statistics.
-# E.g., Check for missing values and duplicates (optional).
 print(data.head())
 print('Number of columns = ', len(data.columns), '\n', data.columns)
 
 data.info()
-# here we notice some missing values in cols Social_Media_Influence and Engagement_with_Ads
-# we note this for dealing with missing values later
-
-# inspect data types, range of values, categories
 data.describe()     # most vars seem to have reasonable measures of central tendency
 data.nunique()      
 # many variables seem to be categorical. We need to know what the categories are.
+
+# clean col names
+data = data.rename(columns={'Time_Spent_on_Product_Research(hours)':'Time_Spent_on_Product_Research'})
+
+# drop missing values
+data = data.dropna()
 
 # Checking non-numeric variables
 cols_list = list(data.columns)
@@ -40,7 +43,6 @@ for col in cols_list:
 # So maybe we shouldn't include them when we think of categorical vars.
 
 # convert the problematic cols into numeric dtypes
-
 # currency column
 data['Purchase_Amount'] = data['Purchase_Amount'].str.replace('$', '', regex=False)
 data['Purchase_Amount'] = data['Purchase_Amount'].astype(float)
@@ -48,21 +50,10 @@ data['Purchase_Amount'] = data['Purchase_Amount'].astype(float)
 # date column
 data['Time_of_Purchase'] = pd.to_datetime(data['Time_of_Purchase'])
 
-# Reference for Analysis:
-# Independent Vars: Age, Gender, Income, Marital Status, Education, Occupation
-#       Time on Product Research, Device used, Customer Loyalty Program member, Social Media Influence,
-#       Engagement with Ads, Payment method, Time of Purchase, Discount Used, Purchase Intent, Shipping Preference
-# Dependent Vars: Purchase category, Purchase amt, Frequency of Purchase,
-#       Brand Loyalty, Product Rating, Return rate, customer satisfaction
-# Vars on the fence: Purchase Channelz, Discount sensitivity, Time to Decision
-
 
 # Basic Filtering and Grouping
 # Apply filters to extract meaningful subsets of the data.
 # Use groupby() or equivalent on a selected variable and compute summary statistics (e.g., mean, count).
-
-
-# Aim: find vars that correlate strongly with Brand Loyalty and Customer Satisfaction
 
 # Summary Stats For Brand Loyalty
 loyalty_income = data.groupby('Income_Level')['Brand_Loyalty'].describe()
@@ -92,37 +83,47 @@ satis_intent = data.groupby('Purchase_Intent')['Social_Media_Influence'].describ
 print(satis_intent)
 
 
-
-
 # Explore a Machine Learning Algorithm
 # Choose an ML algorithm.
 # Begin experimenting with model inputs and outputs.
 
-# Using the K-Prototypes algorithm for customer segmentation
-# across categorical as well as numeric variables.
+target = "Brand_Loyalty"
+X = data.drop(columns=["Customer_ID", target])
+y = data[target]
 
-# Separate categorical and numeric columns
-categorical_cols = ['Income_Level', 'Social_Media_Influence', 'Purchase_Intent']
-numeric_cols = ['Brand_Loyalty', 'Customer_Satisfaction']
+# Encoding categorical variables to prepare them for ML algorithm
+X_encoded = pd.get_dummies(X, drop_first=True)
 
-# Convert to numpy array
-matrix = data[categorical_cols + numeric_cols].to_numpy().astype(object)
+# Train/test split
+X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.2, random_state=42)
 
-# Fit K-Prototypes
-kproto = KPrototypes(n_clusters=4, init='Cao', verbose=2)
-clusters = kproto.fit_predict(matrix, categorical=[0, 1])
+# Random Forest model
+rf = RandomForestRegressor(n_estimators=200, random_state=42)
+rf.fit(X_train, y_train)
 
-# Assign cluster labels
-data['Cluster'] = clusters
+# Predictions
+y_pred = rf.predict(X_test)
 
+# Evaluation
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
 
+print("Random Forest Regressor")
+print("Mean Squared Error:", mse)
+print("R² Score:", r2)
 
+# Feature importance
+importances = pd.Series(rf.feature_importances_, index=X_encoded.columns).sort_values(ascending=False)
+print("\nTop Features Driving Brand Loyalty:")
+print(importances.head(10))
 
-
+# Age comes out as the top factor correlated with Brand Loyalty.
+# It'd be nice to see a plot for more details.
 
 # Visualization
 # Create one plot (e.g., histogram, boxplot, scatter plot) using Matplotlib, Seaborn, or others.
+sns.boxplot(data=data, x="Brand_Loyalty", y="Age")
+plt.show()
 
-
-# Documentation
-# Explain your steps and findings in a README.md file.
+# The plot is not very clear as the correlation coefficient is quite low
+# but we observe slight differences across loyalty levels.
