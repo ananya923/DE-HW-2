@@ -2,6 +2,10 @@
 - Name: Ananya Jogalekar
 - NetID: aj463
 
+### Note about files
+
+I created the repository by following the template provided in HW 1, hence I have files for Makefile, requirements, and testing. However, those were not expected in this assignment, so I haven't added any code to them. I might use them for the assignment next week, so they're still present in the repository for my future reference!
+
 # Customer Behavior Analysis
 
 This project explores customer purchase data to understand the drivers of Brand Loyalty.  
