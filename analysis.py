@@ -56,6 +56,7 @@ data['Time_of_Purchase'] = pd.to_datetime(data['Time_of_Purchase'])
 # Use groupby() or equivalent on a selected variable and compute summary statistics (e.g., mean, count).
 
 # Summary Stats For Brand Loyalty
+print('Summary Stats For Brand Loyalty:')
 loyalty_income = data.groupby('Income_Level')['Brand_Loyalty'].describe()
 print(loyalty_income)
 
@@ -70,6 +71,7 @@ print(loyalty_intent)
 
 
 # Summary Stats For Customer Satisfaction
+print('Summary Stats For Customer Satisfaction:')
 satis_income = data.groupby('Income_Level')['Customer_Satisfaction'].describe()
 print(satis_income)
 
@@ -86,7 +88,7 @@ print(satis_intent)
 # Explore a Machine Learning Algorithm
 # Choose an ML algorithm.
 # Begin experimenting with model inputs and outputs.
-
+print('Running ML algorithm now!')
 target = "Brand_Loyalty"
 X = data.drop(columns=["Customer_ID", "Time_of_Purchase", target])
 y = data[target]
@@ -117,13 +119,15 @@ importances = pd.Series(rf.feature_importances_, index=X_encoded.columns).sort_v
 print("\nTop Features Driving Brand Loyalty:")
 print(importances.head(10))
 
+print('Age comes out as the top factor correlated with Brand Loyalty.')
 # Age comes out as the top factor correlated with Brand Loyalty.
 # It'd be nice to see a plot for more details.
 
 # Visualization
 # Create one plot (e.g., histogram, boxplot, scatter plot) using Matplotlib, Seaborn, or others.
-sns.boxplot(data=data, x="Brand_Loyalty", y="Age")
+my_chart = sns.boxplot(data=data, x="Brand_Loyalty", y="Age")
+my_chart.set_title('Relationship between Age and Brand Loyalty')
 plt.show()
 
-# The plot is not very clear as the correlation coefficient is quite low
-# but we observe slight differences across loyalty levels.
+print('The plot is not very clear as the correlation coefficient is quite low ' \
+'but we observe slight differences across loyalty levels.')
