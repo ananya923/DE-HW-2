@@ -4,7 +4,9 @@
 
 ### Note about files
 
-I created the repository by following the template provided in HW 1, hence I have files for Makefile, requirements, and testing. However, those were not expected in this assignment, so I haven't added any code to them. I might use them for the assignment next week, so they're still present in the repository for my future reference!
+I created the repository by following the template provided in HW 1, hence I have files for Makefile and testing. However, those were not expected in this assignment, so I haven't added any code to them. I might use them for the assignment next week, so they're still present in the repository for my future reference!
+
+Also, the visualization plots do not render in the terminal, so they've been added as separate files.
 
 # Customer Behavior Analysis
 
