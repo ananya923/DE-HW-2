@@ -6,7 +6,7 @@
 
 I created the repository by following the template provided in HW 1, hence I have files for Makefile and testing. However, those were not expected in this assignment, so I haven't added any code to them. I might use them for the assignment next week, so they're still present in the repository for my future reference!
 
-Also, the visualization plot does not render in the terminal, so it has been added as separate files called 'titled_chart.png'.
+Also, the visualization plot does not render in the terminal, so it has been added as a separate file called 'titled_chart.png'.
 
 # Customer Behavior Analysis
 
