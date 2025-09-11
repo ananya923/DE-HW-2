@@ -11,6 +11,15 @@ I created the repository by following the template provided in HW 1, hence I hav
 This project explores customer purchase data to understand the drivers of Brand Loyalty.  
 The workflow includes data cleaning, exploratory data analysis (EDA), predictive modeling, and visualization.
 
+## Requirements
+- pandas
+- numpy
+- train_test_split from sklearn.model_selection
+- RandomForestRegressor from sklearn.ensemble
+- mean_squared_error, r2_score from sklearn.metrics
+- seaborn
+- matplotlib.pyplot 
+
 ## Workflow
 
 ### 1. Data Import & Cleaning
@@ -39,3 +48,6 @@ The workflow includes data cleaning, exploratory data analysis (EDA), predictive
 - **Python** (pandas, scikit-learn, matplotlib, seaborn)
 - **Machine Learning**: Logistic Regression
 - **Visualization**: Box plots
+
+## 6. Data Visualization Plot:
+![alt text](image.png)
