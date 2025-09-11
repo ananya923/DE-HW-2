@@ -13,7 +13,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Import the Dataset
-data = pd.read_csv('Data.csv')
+data = pd.read_csv('data.csv')
 
 # Inspect the Data
 print(data.head())
@@ -59,7 +59,7 @@ data['Time_of_Purchase'] = pd.to_datetime(data['Time_of_Purchase'])
 loyalty_income = data.groupby('Income_Level')['Brand_Loyalty'].describe()
 print(loyalty_income)
 
-loyalty_researchTime = data['Time_Spent_on_Product_Research(hours)'].corr(data['Brand_Loyalty'])
+loyalty_researchTime = data['Time_Spent_on_Product_Research'].corr(data['Brand_Loyalty'])
 print(round(loyalty_researchTime,2))
 
 loyalty_mediaInfluence = data.groupby('Social_Media_Influence')['Brand_Loyalty'].describe()
@@ -73,7 +73,7 @@ print(loyalty_intent)
 satis_income = data.groupby('Income_Level')['Customer_Satisfaction'].describe()
 print(satis_income)
 
-satis_researchTime = data['Time_Spent_on_Product_Research(hours)'].corr(data['Customer_Satisfaction'])
+satis_researchTime = data['Time_Spent_on_Product_Research'].corr(data['Customer_Satisfaction'])
 print(round(satis_researchTime,2))
 
 satis_mediaInfluence = data.groupby('Social_Media_Influence')['Customer_Satisfaction'].describe()
@@ -88,7 +88,7 @@ print(satis_intent)
 # Begin experimenting with model inputs and outputs.
 
 target = "Brand_Loyalty"
-X = data.drop(columns=["Customer_ID", target])
+X = data.drop(columns=["Customer_ID", "Time_of_Purchase", target])
 y = data[target]
 
 # Encoding categorical variables to prepare them for ML algorithm
