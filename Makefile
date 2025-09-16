@@ -6,7 +6,7 @@ format:
 	black *.py
 
 lint:
-	flake8 hello.py
+	flake8 analysis.py
 
 test:
 	pytest -v test_analysis.py
