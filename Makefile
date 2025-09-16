@@ -1,0 +1,17 @@
+install:
+	pip install --upgrade pip &&\
+		pip install -r requirements.txt
+
+format:
+	black *.py
+
+lint:
+	flake8 hello.py
+
+test:
+	pytest -v test_analysis.py
+	
+clean:
+	rm -rf __pycache__ .pytest_cache .coverage
+
+all: install format lint test
