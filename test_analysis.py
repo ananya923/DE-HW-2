@@ -10,13 +10,19 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # importing the functions we want to test from other files
-from refactored_analysis import load_clean_data, train_random_forest
+from refactored_analysis import load_data, clean_data, train_random_forest
 
 
 # Testing
 def test_loading_data():
-    df = load_clean_data("data.csv")
-    
+    df = load_data("data.csv")
+    assert isinstance(df, pd.DataFrame)
+    assert df.shape == (1000, 28)
+
+def test_cleaning_data():
+    df = load_data("data.csv")
+    df = clean_data(df)
+
     # test that columns are renamed
     assert "Time_Spent_on_Product_Research" in df.columns
 
@@ -57,7 +63,8 @@ def test_loading_data():
 
 # # testing the ML model ##
 def test_train_random_forest():
-    df = load_clean_data("data.csv")
+    df = load_data("data.csv")
+    df = clean_data(df)
     model, mse, r2 = train_random_forest(df)
 
     # model should have predict method

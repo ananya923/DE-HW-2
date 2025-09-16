@@ -1,5 +1,0 @@
-Customer_ID,Time_Spent_on_Product_Research(hours),Purchase_Amount,Time_of_Purchase,Income_Level,Social_Media_Influence,Purchase_Intent,Age,Brand_Loyalty
-1,2,$100,2021-01-01,Low,Yes,High,25,3
-2,3,$200,2021-02-01,Medium,No,Low,35,4
-3,4,$150,2021-03-01,High,Yes,Medium,45,2
-4,5,$300,2021-04-01,Medium,No,High,55,5

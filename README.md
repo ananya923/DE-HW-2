@@ -2,6 +2,12 @@
 - Name: Ananya Jogalekar
 - NetID: aj463
 
+# To add
+- devcontainer setup instructions
+- file, repo structure
+- edit requirements?
+- description of test cases
+
 ### Note about files
 
 I created the repository by following the template provided in HW 1, hence I have files for Makefile and testing. However, those were not expected in this assignment, so I haven't added any code to them. I might use them for the assignment next week, so they're still present in the repository for my future reference!

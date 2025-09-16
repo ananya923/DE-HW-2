@@ -5,8 +5,11 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Refactoring previous code to create testing functions
-def load_clean_data(filepath):    # Can specify dtypes as : str) -> pd.DataFrame:
+def load_data(filepath):    # Can specify dtypes as : str) -> pd.DataFrame:
     data = pd.read_csv(filepath)
+    return data
+
+def clean_data(data):
     data = data.rename(columns={'Time_Spent_on_Product_Research(hours)':'Time_Spent_on_Product_Research'})
     data = data.dropna()
     data['Purchase_Amount'] = data['Purchase_Amount'].str.replace('$', '', regex=False).astype(float)
