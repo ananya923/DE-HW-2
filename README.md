@@ -88,17 +88,13 @@ This project includes a `.devcontainer` configuration for a consistent developme
 
 # 8. File & Repository Structure
 ```
-├── .devcontainer/ # Devcontainer configuration files
-├── pycache/ # Compiled Python cache files
-├── Makefile # Commands for building, testing, automation
-├── README.md # Project documentation
-├── analysis.py # Initial analysis script
-├── data.csv # Dataset (raw input file)
-├── refactored_analysis.py # Refactored analysis functions (load, clean, explore, train)
-├── requirements.txt # Python dependencies
-├── test_analysis.py # Pytest test cases
+├── .devcontainer/          # Devcontainer configuration files
+├── pycache/                # Compiled Python cache files
+├── Makefile                # Commands for building, testing, automation
+├── README.md               # Project documentation
+├── analysis.py             # Initial analysis script
+├── data.csv                # Dataset (raw input file)
+├── refactored_analysis.py  # Refactored analysis functions (load, clean, explore, train)
+├── requirements.txt        # Python dependencies
+├── test_analysis.py        # Pytest test cases
 ```
-### Tech Stack
-- **Python** (pandas, scikit-learn, matplotlib, seaborn)
-- **Machine Learning**: Logistic Regression
-- **Visualization**: Box plots
