@@ -2,22 +2,10 @@
 - Name: Ananya Jogalekar
 - NetID: aj463
 
-# To add
-- devcontainer setup instructions
-- file, repo structure
-- edit requirements?
-- description of test cases
-
-### Note about files
-
-I created the repository by following the template provided in HW 1, hence I have files for Makefile and testing. However, those were not expected in this assignment, so I haven't added any code to them. I might use them for the assignment next week, so they're still present in the repository for my future reference!
-
-Also, the visualization plot does not render in the terminal, so it has been added as a separate file called 'titled_chart.png'.
-
-# Customer Behavior Analysis
+# Project Description: Customer Behavior Analysis
 
 This project explores customer purchase data to understand the drivers of Brand Loyalty.  
-The workflow includes data cleaning, exploratory data analysis (EDA), predictive modeling, and visualization.
+The workflow includes data cleaning, exploratory data analysis (EDA), predictive modeling, visualization, and testing.
 
 ## Requirements
 - pandas
@@ -27,6 +15,15 @@ The workflow includes data cleaning, exploratory data analysis (EDA), predictive
 - mean_squared_error, r2_score from sklearn.metrics
 - seaborn
 - matplotlib.pyplot 
+
+# Environment Setup Instructions
+## Devcontainer Setup
+This project includes a `.devcontainer` configuration for a consistent development environment in VS Code. It can be enabled using the following steps:
+1. Open your repository in VS Code.
+2. Install the **Dev Containers** extension from the Extensions tab on the left.
+3. Reopen the project in the container by clicking on the blue icon in the bottom left corner (choose the option `Remote-Containers: Reopen in Container`).
+4. All dependencies will be installed automatically, ensuring reproducibility. To cross-check, make sure that the newly opened environment has a devcontainer in its title.
+5. If working locally in VS Code, push all of your changes to GitHub. Ensure that there is a new folder called `.devcontainer` in your repository.
 
 ## Workflow
 
@@ -59,3 +56,48 @@ The workflow includes data cleaning, exploratory data analysis (EDA), predictive
 
 ## 6. Data Visualization Plot:
 ![alt text](image.png)
+
+# 7. Testing
+- Testing is implemented with **pytest** to ensure correctness and reliability of the pipeline.  
+
+### Test Cases
+
+1. **test_loading_data**
+   - Ensures the dataset is loaded correctly into a pandas DataFrame.
+   - Verifies the shape of the DataFrame matches expectations (1000 rows × 28 columns).
+
+2. **test_cleaning_data**
+   - Validates that cleaning functions properly transform the dataset:
+     - Column renaming is applied correctly.
+     - `Purchase_Amount` is converted to numeric.
+     - `Time_of_Purchase` is converted to datetime.
+     - `Age` values lie within a valid range (18–100).
+     - `Brand_Loyalty` values are between 1–5.
+     - `Customer_Satisfaction` values are between 1–10.
+     - `Purchase_Channel` contains only valid categories (Online, In-Store, Mixed).
+   - Edge case checks:
+     - No duplicate `Customer_ID`s.
+     - No negative values in fields like frequency, return rate, or decision time.
+     - Target variable (`Brand_Loyalty`) distribution is not overly skewed.
+
+3. **test_exploring_data**
+   - Confirms that the `explore_data` function returns all expected metrics in a dictionary.
+   - Validates the contents of each returned object:
+     - Grouped statistics (`loyalty_income`, `loyalty_mediaInfluence`, etc.) are DataFrames with expected structure (contain means, correct indices, non-empty).
+     - Correlation outputs (`loyalty_researchTime`, `satis_researchTime`) are floats between -1 and 1.
+
+4. **test_train_random_forest**
+   - Checks that the Random Forest model is trained correctly:
+     - Returned model has a `.predict` method.
+     - Performance metrics (MSE, R²) are floats.
+
+# 8. File & Repository Structure
+├── .devcontainer/ # Devcontainer configuration files
+├── pycache/ # Compiled Python cache files
+├── Makefile # Commands for building, testing, automation
+├── README.md # Project documentation
+├── analysis.py # Initial analysis script
+├── data.csv # Dataset (raw input file)
+├── refactored_analysis.py # Refactored analysis functions (load, clean, explore, train)
+├── requirements.txt # Python dependencies
+├── test_analysis.py # Pytest test cases
