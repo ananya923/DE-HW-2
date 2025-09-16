@@ -23,7 +23,7 @@ This project includes a `.devcontainer` configuration for a consistent developme
 2. Install the **Dev Containers** extension from the Extensions tab on the left.
 3. Reopen the project in the container by clicking on the blue icon in the bottom left corner (choose the option `Remote-Containers: Reopen in Container`).
 4. All dependencies will be installed automatically, ensuring reproducibility. To cross-check, make sure that the newly opened environment has a devcontainer in its title.
-5. If working locally in VS Code, push all of your changes to GitHub. Ensure that there is a new folder called `.devcontainer` in your repository.
+5. If working locally in VS Code, push all of your changes to GitHub. A new folder called `.devcontainer` would be created in your repository.
 
 ## Workflow
 
@@ -48,11 +48,6 @@ This project includes a `.devcontainer` configuration for a consistent developme
 
 ### 5. Visualization
 - Used a Box Plot to illustrate the relationship between Age groups and Brand Loyalty.
-
-## Tech Stack
-- **Python** (pandas, scikit-learn, matplotlib, seaborn)
-- **Machine Learning**: Logistic Regression
-- **Visualization**: Box plots
 
 ## 6. Data Visualization Plot:
 ![alt text](image.png)
@@ -92,6 +87,7 @@ This project includes a `.devcontainer` configuration for a consistent developme
      - Performance metrics (MSE, R²) are floats.
 
 # 8. File & Repository Structure
+```
 ├── .devcontainer/ # Devcontainer configuration files
 ├── pycache/ # Compiled Python cache files
 ├── Makefile # Commands for building, testing, automation
@@ -101,3 +97,8 @@ This project includes a `.devcontainer` configuration for a consistent developme
 ├── refactored_analysis.py # Refactored analysis functions (load, clean, explore, train)
 ├── requirements.txt # Python dependencies
 ├── test_analysis.py # Pytest test cases
+```
+### Tech Stack
+- **Python** (pandas, scikit-learn, matplotlib, seaborn)
+- **Machine Learning**: Logistic Regression
+- **Visualization**: Box plots
