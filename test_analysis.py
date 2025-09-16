@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # importing the functions we want to test from other files
-from refactored_analysis import load_data, clean_data, train_random_forest
+from refactored_analysis import load_data, clean_data, explore_data, train_random_forest
 
 
 # Testing
@@ -59,6 +59,55 @@ def test_cleaning_data():
     # have a very high frequency in the raw data.
     value_counts = df["Brand_Loyalty"].value_counts(normalize=True)
     assert (value_counts < 0.9).all()
+
+def test_exploring_data():
+    df = load_data("data.csv")
+    df = clean_data(df)
+
+    results = explore_data(df)
+
+    # Test that all metrics are returned as expected
+    expected_keys = {"loyalty_income", "loyalty_researchTime", "loyalty_mediaInfluence",
+        "loyalty_intent", "satis_income", "satis_researchTime",
+        "satis_mediaInfluence", "satis_intent"}
+    
+    assert set(results.keys()) == expected_keys
+
+    # Testing summary stats for Brand Loyalty
+    # group by Income_Level
+    assert isinstance(results['loyalty_income'], pd.DataFrame)
+    assert "mean" in results['loyalty_income'].columns
+    assert results['loyalty_income'].index.isin(df["Income_Level"].unique()).all()
+
+    # Correlation with research time
+    assert isinstance(results["loyalty_researchTime"], float)
+    assert -1 <= results["loyalty_researchTime"] <= 1
+
+    # # Group by Social Media Influence
+    assert isinstance(results['loyalty_mediaInfluence'], pd.DataFrame)
+    assert not results['loyalty_mediaInfluence'].empty
+
+    # # Group by Purchase Intent
+    assert isinstance(results['loyalty_intent'], pd.DataFrame)
+    assert not results['loyalty_intent'].empty
+
+    # # Testing summary stats for Customer Satisfatction
+    # Group by Income_Level
+    assert isinstance(results['satis_income'], pd.DataFrame)
+    assert "mean" in results['satis_income'].columns
+    assert results['satis_income'].index.isin(df["Income_Level"].unique()).all()
+
+    # # Correlation with research time
+    assert isinstance(results['satis_researchTime'], float)
+    assert -1 <= results['satis_researchTime'] <= 1
+
+    # # Group by Social Media Influence
+    assert isinstance(results['satis_mediaInfluence'], pd.DataFrame)
+    assert not results['satis_mediaInfluence'].empty
+
+    # # Group by Purchase Intent
+    assert isinstance(results['satis_intent'], pd.DataFrame)
+    assert not results['satis_intent'].empty
 
 
 # # testing the ML model ##
