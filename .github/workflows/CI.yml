@@ -21,4 +21,4 @@ jobs:
     - name: Format with black
       run: black refactored_analysis.py
     - name: Run tests
-      run: pytest --cov=hello
+      run: pytest --cov=refactored_analysis

@@ -1,3 +1,5 @@
+[![CICD for Major Assessment on Refactoring](https://github.com/ananya923/DE-HW-2/actions/workflows/CI.yml/badge.svg)](https://github.com/ananya923/DE-HW-2/actions/workflows/CI.yml)
+
 - Mini-assignment 2 for IDS706 Data Engineering (README made with the help if AI and edited manually for accuracy)
 - Name: Ananya Jogalekar
 - NetID: aj463
