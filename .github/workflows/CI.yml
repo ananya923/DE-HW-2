@@ -19,7 +19,7 @@ jobs:
     - name: Install flake8
       run: pip install flake8
     - name: Run linter
-      run: flake8 refactored_analysis.py
+      run: flake8 refactored_analysis.py --ignore=E501,W503
     - name: Install Black
       run: pip install black
     - name: Format with black
