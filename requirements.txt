@@ -3,3 +3,7 @@ numpy
 scikit-learn
 seaborn
 matplotlib
+pytest
+pytest-cov
+flake8
+black
