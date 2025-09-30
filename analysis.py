@@ -8,9 +8,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
-
-# import seaborn as sns
-# import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def load_data(filepath: str) -> pd.DataFrame:
@@ -161,13 +160,14 @@ def run_random_forest(customer_data, target="Brand_Loyalty"):
     return rf, mse, r2
 
 
-# Visualization (Completed in previous assignments)
-# Create one plot (e.g., histogram, boxplot, scatter plot) using Matplotlib, Seaborn, or others.
-# my_chart = sns.boxplot(data=data, x="Brand_Loyalty", y="Age")
-# my_chart.set_title("Relationship between Age and Brand Loyalty")
-# plt.show()
+# Data Visualization
+def create_visualization(data_file_path: str):
+    print("Visualizing Age against Brand Loyalty:")
+    customer_data = load_data(filepath=data_file_path)
+    my_chart = sns.boxplot(data=customer_data, x="Brand_Loyalty", y="Age")
+    my_chart.set_title("Relationship between Age and Brand Loyalty")
+    plt.show()
 
-# print(
-#     "The plot is not very clear as the correlation coefficient is quite low "
-#     "but we observe slight differences across loyalty levels."
-# )
+
+# Calling the data viz function to render the plot
+create_visualization("data.csv")
