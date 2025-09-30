@@ -160,11 +160,11 @@ def run_random_forest(customer_data, target="Brand_Loyalty"):
     return rf, mse, r2
 
 
-# Visualization
+# Visualization (Completed in previous assignments)
 # Create one plot (e.g., histogram, boxplot, scatter plot) using Matplotlib, Seaborn, or others.
-my_chart = sns.boxplot(data=data, x="Brand_Loyalty", y="Age")
-my_chart.set_title("Relationship between Age and Brand Loyalty")
-plt.show()
+# my_chart = sns.boxplot(data=data, x="Brand_Loyalty", y="Age")
+# my_chart.set_title("Relationship between Age and Brand Loyalty")
+# plt.show()
 
 # print(
 #     "The plot is not very clear as the correlation coefficient is quite low "
