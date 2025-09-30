@@ -1,7 +1,6 @@
 # Name: Ananya Jogalekar
 # NetID: aj463
 # Test File
-# Note on AI use: AI was used debug the syntax for assert statements.
 
 import pandas as pd
 import numpy as np
@@ -10,7 +9,16 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # importing the functions we want to test from other files
-from refactored_analysis import load_data, clean_data, explore_data, train_random_forest
+from refactored_analysis import (
+    load_data,
+    clean_data,
+    groupby_income,
+    corr_by_researchTime,
+    groupby_mediaInfluence,
+    groupby_purchaseIntent,
+    explore_data,
+    run_random_forest,
+)
 
 
 # Testing
@@ -18,6 +26,7 @@ def test_loading_data():
     df = load_data("data.csv")
     assert isinstance(df, pd.DataFrame)
     assert df.shape == (1000, 28)
+
 
 def test_cleaning_data():
     df = load_data("data.csv")
@@ -31,7 +40,7 @@ def test_cleaning_data():
 
     # test that Time_of_Purchase is datetime
     assert pd.api.types.is_datetime64_any_dtype(df["Time_of_Purchase"])
-    
+
     # test for Age col: values should be within range 18 to 100
     assert df["Age"].between(18, 100).all()
 
@@ -60,6 +69,7 @@ def test_cleaning_data():
     value_counts = df["Brand_Loyalty"].value_counts(normalize=True)
     assert (value_counts < 0.9).all()
 
+
 def test_exploring_data():
     df = load_data("data.csv")
     df = clean_data(df)
@@ -67,54 +77,61 @@ def test_exploring_data():
     results = explore_data(df)
 
     # Test that all metrics are returned as expected
-    expected_keys = {"loyalty_income", "loyalty_researchTime", "loyalty_mediaInfluence",
-        "loyalty_intent", "satis_income", "satis_researchTime",
-        "satis_mediaInfluence", "satis_intent"}
-    
+    expected_keys = {
+        "loyalty_by_income",
+        "loyalty_by_researchTime",
+        "loyalty_by_mediaInfluence",
+        "loyalty_by_intent",
+        "satis_by_income",
+        "satis_by_researchTime",
+        "satis_by_mediaInfluence",
+        "satis_by_intent",
+    }
+
     assert set(results.keys()) == expected_keys
 
     # Testing summary stats for Brand Loyalty
     # group by Income_Level
-    assert isinstance(results['loyalty_income'], pd.DataFrame)
-    assert "mean" in results['loyalty_income'].columns
-    assert results['loyalty_income'].index.isin(df["Income_Level"].unique()).all()
+    assert isinstance(results["loyalty_by_income"], pd.DataFrame)
+    assert "mean" in results["loyalty_by_income"].columns
+    assert results["loyalty_by_income"].index.isin(df["Income_Level"].unique()).all()
 
     # Correlation with research time
-    assert isinstance(results["loyalty_researchTime"], float)
-    assert -1 <= results["loyalty_researchTime"] <= 1
+    assert isinstance(results["loyalty_by_researchTime"], float)
+    assert -1 <= results["loyalty_by_researchTime"] <= 1
 
     # # Group by Social Media Influence
-    assert isinstance(results['loyalty_mediaInfluence'], pd.DataFrame)
-    assert not results['loyalty_mediaInfluence'].empty
+    assert isinstance(results["loyalty_by_mediaInfluence"], pd.DataFrame)
+    assert not results["loyalty_by_mediaInfluence"].empty
 
     # # Group by Purchase Intent
-    assert isinstance(results['loyalty_intent'], pd.DataFrame)
-    assert not results['loyalty_intent'].empty
+    assert isinstance(results["loyalty_by_intent"], pd.DataFrame)
+    assert not results["loyalty_by_intent"].empty
 
     # # Testing summary stats for Customer Satisfatction
     # Group by Income_Level
-    assert isinstance(results['satis_income'], pd.DataFrame)
-    assert "mean" in results['satis_income'].columns
-    assert results['satis_income'].index.isin(df["Income_Level"].unique()).all()
+    assert isinstance(results["satis_by_income"], pd.DataFrame)
+    assert "mean" in results["satis_by_income"].columns
+    assert results["satis_by_income"].index.isin(df["Income_Level"].unique()).all()
 
     # # Correlation with research time
-    assert isinstance(results['satis_researchTime'], float)
-    assert -1 <= results['satis_researchTime'] <= 1
+    assert isinstance(results["satis_by_researchTime"], float)
+    assert -1 <= results["satis_by_researchTime"] <= 1
 
     # # Group by Social Media Influence
-    assert isinstance(results['satis_mediaInfluence'], pd.DataFrame)
-    assert not results['satis_mediaInfluence'].empty
+    assert isinstance(results["satis_by_mediaInfluence"], pd.DataFrame)
+    assert not results["satis_by_mediaInfluence"].empty
 
     # # Group by Purchase Intent
-    assert isinstance(results['satis_intent'], pd.DataFrame)
-    assert not results['satis_intent'].empty
+    assert isinstance(results["satis_by_intent"], pd.DataFrame)
+    assert not results["satis_by_intent"].empty
 
 
 # # testing the ML model ##
 def test_train_random_forest():
     df = load_data("data.csv")
     df = clean_data(df)
-    model, mse, r2 = train_random_forest(df)
+    model, mse, r2 = run_random_forest(df)
 
     # model should have predict method
     assert hasattr(model, "predict")
@@ -122,6 +139,3 @@ def test_train_random_forest():
     # metrics should be floats
     assert isinstance(mse, float)
     assert isinstance(r2, float)
-
-
-
