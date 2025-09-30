@@ -1,6 +1,6 @@
 # Name: Ananya Sameer Jogalekar
 # NetID: aj463
-# IDS 706 Data Engineering Week 2 Mini-Assignment: Start Your First Data Analysis
+# IDS 706 Data Engineering Week 2 Mini-Assignment - First Major Assignment
 # Dataset chosen: 'Ecommerce Consumer Behavior Analysis Data' from suggested datasets
 
 # Importing necessary libraries

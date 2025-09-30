@@ -6,7 +6,7 @@ format:
 	black *.py
 
 lint:
-	flake8 refactored_analysis.py --ignore=E501,W503
+	flake8 analysis.py --ignore=E501,W503
 
 test:
 	pytest -v test_analysis.py
