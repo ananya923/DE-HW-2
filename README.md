@@ -157,10 +157,17 @@ Age is found to have the largest impact on Brand Loyalty, although the coefficie
 
 ## Improvements during refactoring (renamed variables, helper functions, structured comments, CICD pipeline, among others):
 1.	Made helper functions for each comparison in EDA using Extract Method.
+[Helper_Function_Screenshot](screenshots/screenshot2.png)
+[Code_replaced_screenshot](screenshots/screenshot3.png)
+
 2.	Used Rename to change variable names to var_by_income, loyalty_by_income, etc. Did this in the function definitions, their calls in EDA, as well as variable names in the output.
+[Variables_renamed_screenshot](screenshots/screenshot4.png)
+
 3.  Updated the testing file to test newly-added helper functions too, along with previously existing code.
 4.	Changed the name of train_random_forest function to run_random_forest, because that function returns the entire output of the ML algorithm, and doesn’t stop at training data.
-5.	Removed unnecessarily long comments in analysis.py and improved the overall comment structure. Added simple comments to the run_random_forest function because there weren’t any comments in it earlier.
+5.	Removed unnecessarily long comments in analysis.py and improved the overall comment and code structure. Added simple comments to the run_random_forest function because there weren’t any comments in it earlier.
+[Code_reorganized_screenshot](screenshots/screenshot1.png)
+
 6.  Added a CICD pipeline and yml file.
 7.  Added a status badge to the README file.
 8.	Added docstrings to all functions.
