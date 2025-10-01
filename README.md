@@ -10,11 +10,7 @@ The dataset provides data on consumer purchase activity, social media activity, 
 
 ## 2. Dataset
 
-Source (real/fictional/synthetic).
-
-Variables included (purchase amount, income, impressions, etc.).
-
-Any preprocessing/cleaning steps done.
+This dataset is sourced from [kaggle.com](https://www.kaggle.com/datasets/salahuddinahmedshuvo/ecommerce-consumer-behavior-analysis-data). It contains detailed consumer behavior information suitable for market research and statistical analysis. It covers purchasing patterns, demographics, product preferences, and outcomes like customer satisfaction and brand loyalty. The data can be applied to tasks such as market segmentation, predictive modeling, and analyzing decision-making processes.
 
 # 3. File & Repository Structure
 ```
@@ -33,6 +29,7 @@ Any preprocessing/cleaning steps done.
 ├── .pytest_cache/          # pytest cache files
 ├── test_cases_passed.png   # Screenshot of passing test results
 ├── titled_chart.png        # Visualization chart
+├── screenshots             # screenshots of changes in refactoring
 ```
 
 # 4. Installation & Setup
@@ -49,7 +46,7 @@ Any preprocessing/cleaning steps done.
 - black
 - flake8
 
-### 4.x. Virtual Environment Instructions: Devcontainer Setup
+### 4.2. Virtual Environment Instructions: Devcontainer Setup
 This project includes a `.devcontainer` configuration for a consistent development environment in VS Code. It can be enabled using the following steps:
 1. Open your repository in VS Code.
 2. Install the **Dev Containers** extension from the Extensions tab on the left.
@@ -61,57 +58,57 @@ This project includes a `.devcontainer` configuration for a consistent developme
 
 ### How to run the project pipeline:
 
-#### 1. make all
+#### 5.1. make all
 This would run the Makefile, which contains commands to run the project workflow. They include the following:
 
-#### 2. Installing python dependencies using `make install`
+#### 5.2. Installing python dependencies using `make install`
 This would install the necessary libraries required to run the project, including formatting and linting libraries.
 
-#### 3. make format
+#### 5.3. make format
 This would apply black formatting to all python script files.
 
-#### 4. make lint
+#### 5.4. make lint
 This would prune unnecessary code and unclean formatting from the files. We will be ignoring trivial errors for extra whitespace and longer lines (Error codes E501,W503).
 
-#### 5. make test
+#### 5.5. make test
 This would run the testing file `test_analysis.py`, which tests the file `analysis.py`. Below is a description of the workflow in these files:
 
-#### `analysis.py`
-#### 1. Data Import & Cleaning
+### 5.6. `analysis.py`
+#### 5.6.1. Data Import & Cleaning
 - Loaded the dataset (`data.csv`) into a pandas DataFrame.
 - Removed identifiers (`Customer_ID`) and cleaned column names.
 - Cleaned numeric columns (e.g., `Purchase_Amount`).
 - Encoded categorical variables using one-hot encoding for analysis.
 
-#### 2. Exploratory Data Analysis (EDA).
+#### 5.6.2. Exploratory Data Analysis (EDA).
 - Checked correlations between variables of interest, like Customer Satisfaction and Brand Loyalty.
 - Identified Brand Loyalty as a key variable of interest for prediction.
 - Defined my research question: "Identify the variable that is the most strongly correlated with Brand Loyalty."
 
-#### 3. Predictive Modeling
+#### 5.6.3. Predictive Modeling
 - Framed Brand Loyalty as a categorical target (e.g., low, medium, high).
 - Applied Logistic Regression to predict customer loyalty.
 - Evaluated model performance with accuracy and classification metrics.
 
-#### 4. Results
+#### 5.6.4. Results
 - Among all features, Age showed the strongest correlation with Brand Loyalty.
 
-#### 5. Visualization
+#### 5.6.5. Visualization
 - Used a Box Plot to illustrate the relationship between Age groups and Brand Loyalty.
 
-#### 6. Data Visualization Plot:
+#### 5.6.6. Data Visualization Plot:
 - Used seaborn to generate a boxplot of Age against Brand Loyalty.
 
-#### 7. Testing
+#### 5.6.7. Testing
 - Testing is implemented with **pytest** to ensure correctness and reliability of the pipeline.  
 
-#### Test Cases in `test_analysis.py`
+### 5.7. Test Cases in `test_analysis.py`
 
-#### 1. **test_loading_data**
+#### 5.7.1. test_loading_data
    - Ensures the dataset is loaded correctly into a pandas DataFrame.
    - Verifies the shape of the DataFrame matches expectations (1000 rows × 28 columns).
 
-#### 2. **test_cleaning_data**
+#### 5.7.2. test_cleaning_data
    - Validates that cleaning functions properly transform the dataset:
      - Column renaming is applied correctly.
      - `Purchase_Amount` is converted to numeric.
@@ -125,19 +122,19 @@ This would run the testing file `test_analysis.py`, which tests the file `analys
      - No negative values in fields like frequency, return rate, or decision time.
      - Target variable (`Brand_Loyalty`) distribution is not overly skewed.
 
-#### 3. **test_exploring_data**
+#### 5.7.3. test_exploring_data
    - Confirms that the `explore_data` function returns all expected metrics in a dictionary.
    - Validates the contents of each returned object:
      - Grouped statistics (`loyalty_income`, `loyalty_mediaInfluence`, etc.) are DataFrames with expected structure (contain means, correct indices, non-empty).
      - Correlation outputs (`loyalty_researchTime`, `satis_researchTime`) are floats between -1 and 1.
 
-#### 4. **test_train_random_forest**
+#### 5.7.4. test_train_random_forest
    - Checks that the Random Forest model is trained correctly:
      - Returned model has a `.predict` method.
      - Performance metrics (MSE, R²) are floats.
 
 
-#### 6. make clean
+#### 5.8. make clean
 This deletes compiled Python cache files.
 
 
@@ -145,39 +142,39 @@ This deletes compiled Python cache files.
 
 To maintain consistency and code quality across the pipeline, this project contains a Continuous Integration and Continuous Delivery/Continuous Deployment (CICD) workflow. The GitHub Actions workflow performs CICD in the following way:
 
-1. Run Linting using flake8.
-2. Run formatting using black formatter.
-3. Run test cases using pytest and testing.py to ensure test coverage after changes to code.
+- Run Linting using flake8.
+- Run formatting using black formatter.
+- Run test cases using pytest and testing.py to ensure test coverage after changes to code.
 
 
 # 7. Results & Visualizations
 
 Age is found to have the largest impact on Brand Loyalty, although the coefficient is fairly low in absolute terms. Below is the visualization chart built by the analysis script.
 
-[Contribution guidelines for this project](titled_chart.png)
+[titled_chart](titled_chart.png)
 
 # 8. Refactoring & Code Quality
 
-## Improvements during refactoring (renamed variables, helper functions, structured comments, CICD pipeline, among others):
-1.	Made helper functions for each comparison in EDA using Extract Method.
-2.	Used Rename to change variable names to var_by_income, loyalty_by_income, etc. Did this in the function definitions, their calls in EDA, as well as variable names in the output.
-3.  Updated the testing file to test newly-added helper functions too, along with previously existing code.
-4.	Changed the name of train_random_forest function to run_random_forest, because that function returns the entire output of the ML algorithm, and doesn’t stop at training data.
-5.	Removed unnecessarily long comments in analysis.py and improved the overall comment structure. Added simple comments to the run_random_forest function because there weren’t any comments in it earlier.
-6.  Added a CICD pipeline and yml file.
-7.  Added a status badge to the README file.
-8.	Added docstrings to all functions.
-9.	Made a function for data visualization.
-10.	Updated the README file to remove AI-generated content.
+## - Improvements during refactoring (renamed variables, helper functions, structured comments, CICD pipeline, among others):
+- 8.1.	Made helper functions for each comparison in EDA using Extract Method.
+- 8.2.	Used Rename to change variable names to var_by_income, loyalty_by_income, etc. Did this in the function definitions, their calls in EDA, as well as variable names in the output.
+- 8.3.  Updated the testing file to test newly-added helper functions too, along with previously existing code.
+- 8.4.	Changed the name of train_random_forest function to run_random_forest, because that function returns the entire output of the ML algorithm, and doesn’t stop at training data.
+- 8.5.	Removed unnecessarily long comments in analysis.py and improved the overall comment structure. Added simple comments to the run_random_forest function because there weren’t any comments in it earlier.
+- 8.6.  Added a CICD pipeline and yml file.
+- 8.7.  Added a status badge to the README file.
+- 8.8.	Added docstrings to all functions.
+- 8.9.	Made a function for data visualization.
+- 8.10.	Updated the README file to remove AI-generated content.
 
 - Benefits of Refactoring: better reproducibility and maintainability, among others.
 
 # 9. Future Work
 
 ### Possible next steps:
-1. Try fitting other Ml algorithms to get better results.
-2. Expand the dataset to improve the accuracy of predictions.
-3. Collect data on sub-indicators of Brand Loyalty, such as Purchase Repetitions and Repeated Visits to Websites. Parse the impact of predictor variables across these sub-indicators by running more analysis.
+- Try fitting other ML algorithms to get better results.
+- Expand the dataset to improve the accuracy of predictions.
+- Collect data on sub-indicators of Brand Loyalty, such as Purchase Repetitions and Repeated Visits to Websites. Parse the impact of predictor variables across these sub-indicators by running more analysis.
 
 
 # 10. Contributors
