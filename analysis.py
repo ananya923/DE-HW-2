@@ -164,7 +164,9 @@ def run_random_forest(customer_data, target="Brand_Loyalty"):
 def create_visualization(data_file_path: str):
     print("Visualizing Age against Brand Loyalty:")
     customer_data = load_data(filepath=data_file_path)
-    my_chart = sns.boxplot(data=customer_data, x="Brand_Loyalty", y="Age")
+    my_chart = sns.boxplot(
+        data=customer_data, x="Brand_Loyalty", y="Age", orientation="horizontal"
+    )
     my_chart.set_title("Relationship between Age and Brand Loyalty")
     plt.show()
 
