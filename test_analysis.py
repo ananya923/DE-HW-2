@@ -9,7 +9,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # importing the functions we want to test from other files
-from refactored_analysis import (
+from analysis import (
     load_data,
     clean_data,
     groupby_income,
