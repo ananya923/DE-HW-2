@@ -156,18 +156,18 @@ Age is found to have the largest impact on Brand Loyalty, although the coefficie
 # 8. Refactoring & Code Quality
 
 ## - Improvements during refactoring (renamed variables, helper functions, structured comments, CICD pipeline, among others):
-- 8.1.	Made helper functions for each comparison in EDA using Extract Method.
-- 8.2.	Used Rename to change variable names to var_by_income, loyalty_by_income, etc. Did this in the function definitions, their calls in EDA, as well as variable names in the output.
-- 8.3.  Updated the testing file to test newly-added helper functions too, along with previously existing code.
-- 8.4.	Changed the name of train_random_forest function to run_random_forest, because that function returns the entire output of the ML algorithm, and doesn’t stop at training data.
-- 8.5.	Removed unnecessarily long comments in analysis.py and improved the overall comment structure. Added simple comments to the run_random_forest function because there weren’t any comments in it earlier.
-- 8.6.  Added a CICD pipeline and yml file.
-- 8.7.  Added a status badge to the README file.
-- 8.8.	Added docstrings to all functions.
-- 8.9.	Made a function for data visualization.
-- 8.10.	Updated the README file to remove AI-generated content.
+1.	Made helper functions for each comparison in EDA using Extract Method.
+2.	Used Rename to change variable names to var_by_income, loyalty_by_income, etc. Did this in the function definitions, their calls in EDA, as well as variable names in the output.
+3.  Updated the testing file to test newly-added helper functions too, along with previously existing code.
+4.	Changed the name of train_random_forest function to run_random_forest, because that function returns the entire output of the ML algorithm, and doesn’t stop at training data.
+5.	Removed unnecessarily long comments in analysis.py and improved the overall comment structure. Added simple comments to the run_random_forest function because there weren’t any comments in it earlier.
+6.  Added a CICD pipeline and yml file.
+7.  Added a status badge to the README file.
+8.	Added docstrings to all functions.
+9.	Made a function for data visualization.
+10.	Updated the README file to remove AI-generated content.
 
-- Benefits of Refactoring: better reproducibility and maintainability, among others.
+Benefits of Refactoring: better reproducibility and maintainability, among others.
 
 # 9. Future Work
 
