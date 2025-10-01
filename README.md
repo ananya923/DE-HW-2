@@ -155,7 +155,7 @@ Age is found to have the largest impact on Brand Loyalty, although the coefficie
 
 # 8. Refactoring & Code Quality
 
-## - Improvements during refactoring (renamed variables, helper functions, structured comments, CICD pipeline, among others):
+## Improvements during refactoring (renamed variables, helper functions, structured comments, CICD pipeline, among others):
 1.	Made helper functions for each comparison in EDA using Extract Method.
 2.	Used Rename to change variable names to var_by_income, loyalty_by_income, etc. Did this in the function definitions, their calls in EDA, as well as variable names in the output.
 3.  Updated the testing file to test newly-added helper functions too, along with previously existing code.
