@@ -1,8 +1,8 @@
 pandas
 numpy
 scikit-learn
-seaborn
-matplotlib
+seaborn==0.13.2
+matplotlib>=3.7.0
 pytest
 pytest-cov
 flake8

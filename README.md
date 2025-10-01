@@ -171,8 +171,7 @@ Age is found to have the largest impact on Brand Loyalty, although the coefficie
 6.  Added a CICD pipeline and yml file.
 7.  Added a status badge to the README file.
 8.	Added docstrings to all functions.
-9.	Made a function for data visualization.
-10.	Updated the README file to remove AI-generated content.
+9.	Updated the README file to remove AI-generated content.
 
 Benefits of Refactoring: better reproducibility and maintainability, among others.
 
